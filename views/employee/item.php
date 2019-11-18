@@ -16,7 +16,7 @@
     <li class="employee__item"><span>Imię Ojca: </span><?= $data['emp']['father_fname'] ?></li>
     
     <li class="employee__item"><span>Miejsce urodzenia: </span><?= $data['emp']['birth_place'] ?></li>
-    <li class="employee__item"><span>NIP: </span> <?= $data['emp']['birth_date'] ?></li>
+    <li class="employee__item"><span>Data urodzenia: </span> <?= $data['emp']['birth_date'] ?></li>
     <li class="employee__item"><span>Gmina: </span> <?= $data['emp']['pesel'] ?></li>
     <li class="employee__item"><span>Miasto: </span> <?= $data['emp']['nip'] ?></li>
     <li class="employee__item"><span>Ulica: </span> <?= $data['emp']['district'] ?></li>

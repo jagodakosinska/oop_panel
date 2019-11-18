@@ -3,9 +3,9 @@
 include 'config.php';
 include 'database.php';
 
-include('controllers/employee.php');
-include('controllers/displayer.php');
-
+include('classes/employee.php');
+include('classes/displayer.php');
+include('classes/validator.php');
 
 
 //=================  settings ===============
@@ -14,7 +14,7 @@ $db = $database->getConnection();
 
 $emp = new Employee($db);
 $displayer = new Displayer();
-
+$valid = new Validator();
 
 $p = array_merge($_POST, $_GET);
 
@@ -23,20 +23,23 @@ $show_employee = isset($p['show_emp']) && is_numeric($p['show_emp']);
 $edit_employee = isset($p['edit_emp']) && is_numeric($p['edit_emp']);
 $update_employee = isset($p['update_emp']) && isset($p['id']) && is_numeric($p['id']);
 $add_new_employee = isset($p['add_emp']);
+$insert_employee = isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj';
 // without view
 
 
-// function check_form($key, $arr) {
-//     if(is_array($arr)) {
-//         return isset($arr[$key]) ? $arr[$key] : '';
-//     }
-//     }
+
 
 if ($update_employee) {
     $id = $p['id'];
-    $emp->update_emp($id);
+    $arr = $valid->valid_employee();
+    $emp->update_emp($id, $arr);
     $show_employee = true;
     $p['show_emp'] = $p['id'];
+}elseif($insert_employee){
+    $arr = $valid->valid_employee();
+    $res = $emp->insert_emp($arr);
+    $show_employee = true;
+    $p['show_emp'] = $res['id'];
 }
 
 // var_dump($_POST);
@@ -63,15 +66,21 @@ if ($list_employee) {
     $template_name = 'views/employee/form.php';
     $data['page_title'] = "Edycja Pracownika";
     $id = $p['edit_emp'];
+    $data['submit']  = 'update_emp';
+    $data['value'] = 'Edytuj';
     $data['emp'] = $emp->get_by_id($id);
     $data['emp'] =  $data['emp'][0];
     $displayer->load_view($data, $template_name);
 } elseif ($add_new_employee) { 
     $template_name = 'views/employee/form.php';
     $data['emp'] = '';
+    $data['submit'] = 'insert_emp';
+    $data['value'] = 'Dodaj';
     $data['page_title'] = "Dodaj Pracownika";
     $displayer->load_view($data, $template_name);
 }
+
+
 
 
 

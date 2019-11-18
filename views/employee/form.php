@@ -125,7 +125,7 @@
                         <label class="control-label" for="basicinput">Kod pocztowy</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="text" name="zip]" value="<?= $this->check_form('zip', $data['emp']) ?>" class="span8 tip">
+                                <input type="text" name="zip" value="<?= $this->check_form('zip', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
                     </div>
 <hr>
                     
-                            <input class="btn btn-hover btn-block"  name="update_emp" type="submit" value="Edytuj" />
+                            <input class="btn btn-hover btn-block"  name="<?=  $data['submit']  ?>" type="submit" value="<?=  $data['value']  ?>" />
                            
                    
                             </form>

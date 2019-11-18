@@ -30,10 +30,13 @@ class Employee {
         return $res;
     }
 
-    public function update_emp($id){
-        $sql ="UPDATE employee WHERE id=$id";
+    public function update_emp($id, $arr){
+        $sql ="UPDATE `employee` SET $arr WHERE id=$id";
         $res = $this->conn->query($sql);
         return $res;
+    }
+    public function insert_emp($arr){
+        
     }
 
 }
