@@ -124,3 +124,7 @@ body {
     text-align: center;
     font-size: 20px;
 }
+input {
+    height: auto important!;
+    /* line-height: 30px; */
+}

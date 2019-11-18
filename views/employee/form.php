@@ -68,14 +68,14 @@
                             </div>
                         </div>
                     </div> -->
-                    <!-- <div class="control-group">
+                    <div class="control-group">
                         <label class="control-label" for="basicinput">PESEL</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="text" name="pesel" value="<?= $this->check_form('fname', $data['emp']) ?>" class="span8 tip">
+                                <input type="text" name="emp[pesel]" value=" <?= $this->check_form('pesel', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <!-- <div class="control-group">
                         <label class="control-label" for="basicinput">NIP</label>
                         <div class="controls">
