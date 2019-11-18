@@ -7,7 +7,12 @@
 
             <div class="module">
                 <div class="module-head">
-                  
+                  <?php if(!empty($data['errors'])){
+                      foreach($data['errors'] as $error) {?>
+                    <div class="alert alert-danger">
+                       <?= $error ?>
+                    </div>
+                <?php  }  } ?>
                 </div>
                 <div class="module-body">
 
@@ -17,14 +22,14 @@
                     <div class="control-group">
                         <label class="control-label" for="basicinput">Imię</label>
                         <div class="controls">
-                            <input type="text" name="fname" value="<?= $this->check_form('fname', $data['emp']) ?>" class="span8 tip">
+                            <input type="text" name="emp[fname]" value="<?= $this->check_form('fname', $data['emp']) ?>" class="span8 tip">
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label" for="basicinput">Nazwisko</label>
                         <div class="controls">
-                            <input type="text" name="lname" value="<?= $this->check_form('lname', $data['emp']) ?>" class="span8 tip">
+                            <input type="text" name="emp[lname]" value="<?= $this->check_form('lname', $data['emp']) ?>" class="span8 tip">
                         </div>
                     </div>
 
@@ -32,7 +37,7 @@
                         <label class="control-label" for="basicinput">Miejsce urodzenia</label>
                         <div class="controls">
                             <div class="input-prepend">
-                                <input class="span8 tip" type="text" n name="birth_place" value="<?= $this->check_form('birth_place', $data['emp']) ?>">
+                                <input class="span8 tip" type="text" name="emp[birth_place]" value="<?= $this->check_form('birth_place', $data['emp']) ?>">
 
                             </div>
                         </div>
@@ -42,7 +47,7 @@
                         <label class="control-label" for="basicinput">Data urodzenia</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="date" name="birth_date" value="<?= $this->check_form('birth_date', $data['emp']) ?>" class="span8 tip">
+                                <input type="date" name="emp[birth_date]" value="<?= $this->check_form('birth_date', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
                     </div>
@@ -84,7 +89,7 @@
                         <label class="control-label" for="basicinput">Miejscowość</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="text" name="city" value="<?= $this->check_form('city', $data['emp']) ?>" class="span8 tip">
+                                <input type="text" name="emp[city]" value="<?= $this->check_form('city', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
                     </div>
@@ -100,7 +105,7 @@
                         <label class="control-label" for="basicinput">Ulica</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="text" name="street" value="<?= $this->check_form('street', $data['emp']) ?>" class="span8 tip">
+                                <input type="text" name="emp[street]" value="<?= $this->check_form('street', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
                     </div>
@@ -108,7 +113,7 @@
                         <label class="control-label" for="basicinput">Nr domu</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="text" name="street_nr" value="<?= $this->check_form('street_nr', $data['emp']) ?>" class="span8 tip">
+                                <input type="text" name="emp[street_nr]" value="<?= $this->check_form('street_nr', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
                     </div>
@@ -116,7 +121,7 @@
                         <label class="control-label" for="basicinput">Nr mieszkania</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="text" name="home_nr" value="<?= $this->check_form('home_nr', $data['emp']) ?>" class="span8 tip">
+                                <input type="text" name="emp[home_nr]" value="<?= $this->check_form('home_nr', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
                     </div>
@@ -125,7 +130,7 @@
                         <label class="control-label" for="basicinput">Kod pocztowy</label>
                         <div class="controls">
                             <div class="input-append">
-                                <input type="text" name="zip" value="<?= $this->check_form('zip', $data['emp']) ?>" class="span8 tip">
+                                <input type="text" name="emp[zip]" value="<?= $this->check_form('zip', $data['emp']) ?>" class="span8 tip">
                             </div>
                         </div>
                     </div>
@@ -164,11 +169,11 @@
                         <label class="control-label">Koszty %</label>
                         <div class="controls">
                         <label class="radio inline">
-                                <input type="radio" name="cost_pcent" id="optionsRadios1" value="20" checked="">
+                                <input type="radio" name="emp[cost_pcent]" id="optionsRadios1" value="20" checked="">
                                 20%
                             </label>
                             <label class="radio inline">
-                                <input type="radio" name="cost_pcent" id="optionsRadios2" value="50">
+                                <input type="radio" name="emp[cost_pcent]" id="optionsRadios2" value="50">
                                 50%
                             </label>
                         </div>
@@ -178,11 +183,11 @@
                         <label class="control-label">Forma zapłaty</label>
                         <div class="controls">
                         <label class="radio inline">
-                                <input type="radio" name="bank_transfer" id="optionsRadios1" value="1" checked="">
+                                <input type="radio" name="emp[bank_transfer]" id="optionsRadios1" value="1" checked="">
                                 przelew
                             </label>
                             <label class="radio inline">
-                                <input type="radio" name="bank_transfer" id="optionsRadios2" value="0">
+                                <input type="radio" name="emp[bank_transfer]" id="optionsRadios2" value="0">
                                 gotówka
                             </label>
                         </div>
@@ -193,11 +198,11 @@
                         <label class="control-label">Rodzaj umowy</label>
                         <div class="controls">
                             <label class="radio inline">
-                                <input type="radio" name="task_contract" id="optionsRadios1" value="D" checked="">
+                                <input type="radio" name="emp[task_contract]" id="optionsRadios1" value="D" checked="">
                                 dzieło
                             </label>
                             <label class="radio inline">
-                                <input type="radio" name="task_contract" id="optionsRadios2" value="Z">
+                                <input type="radio" name="emp[task_contract]" id="optionsRadios2" value="Z">
                                 zlecenie
                             </label>
                         </div>

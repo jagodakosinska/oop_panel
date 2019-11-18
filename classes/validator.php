@@ -4,33 +4,38 @@ class Validator
 
 
 
-    function valid_employee()
+    function valid_employee($emp)
     {
       
         $err = [];
         // $format = 'Y-m-d';
-        $fname = trim($_POST['fname']);
+        $fname = trim($emp['fname']);
         if(empty($fname)) $err[] = 'Imię nie może być puste';
-        $lname = trim($_POST['lname']);
+        $lname = trim($emp['lname']);
         if(empty($lname)) $err[] = 'Nazwisko nie może być puste';
-        $birth_place = trim($_POST['birth_place']);
+        $birth_place = trim($emp['birth_place']);
         if(empty($birth_place)) $err[] = 'Miejsce urodzenia nie może być puste';
-        $birth_date = $this->valid_date($_POST['birth_date']);
+        $birth_date = $this->valid_date($emp['birth_date']);
         if(empty($birth_date)) $err[] = 'Data urodzenia nie może być pusta';
        // $birth_date = $this->validat_date($birth_date, $format) ? $birth_date : '';
-        $city = trim($_POST['city']);
+        $city = trim($emp['city']);
         if(empty($city)) $err[] = 'Miasto nie może być puste';
-        $street = trim($_POST['street']);
-        if(empty($street)) $err[] = 'Ulica nie może być pusta';
-        $street_nr = trim($_POST['street_nr']);
+        $street = trim($emp['street']);
+        $street_nr = trim($emp['street_nr']);
         if(empty($street_nr)) $err[] = 'Numer domu nie może być pusty';
-        $home_nr = trim($_POST['home_nr']);
-        $zip = trim($_POST['zip']);
+        $home_nr = trim($emp['home_nr']);
+        $zip = trim($emp['zip']);
         if(empty($zip)) $err[] = 'Kod pocztowy nie może być pusty';
-
-        if(count($err) !== 0){
-            $res = ['status' => false, 'data' => $err];
-        } else {
+        $res = [];
+        $res['status'] = true;
+        $res['data'] = [];
+        if(count($err)){
+            $res['status'] = false;
+            $res['data'] = $err;
+            // var_dump($res);
+            // die;
+            return $res;
+        } 
             $arr = [
                 'fname' => $fname,
                 'lname' => $lname,
@@ -42,15 +47,12 @@ class Validator
                 'home_nr' => $home_nr,
                 'zip' => $zip,
             ];
-            $res = ['status', 'data'];
-            $res['status'] = true;
+          
             foreach($arr as $key => $value){
-                $res ['data'] = "`" . $key . "`= '" . $value . "'";
+                $res['data'][] = "`" . $key . "`= '" . $value . "'";
             }
             $res['data'] = join(', ', $res['data']);
-
-            
-        }
+      
         
         // var_dump($res);
         // die;
