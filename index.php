@@ -6,6 +6,7 @@ include 'database.php';
 include('classes/employee.php');
 include('classes/displayer.php');
 include('classes/validator.php');
+include('classes/contract.php');
 
 function dump($val){
 echo '<pre>';
@@ -14,9 +15,8 @@ echo '</pre>';
 }
 //=================  settings ===============
 $db = new Database();
-
-
 $emp = new Employee($db);
+$cont = new Contract($db);
 $displayer = new Displayer();
 $valid = new Validator();
 
@@ -28,6 +28,9 @@ $edit_employee = isset($p['edit_emp']) && is_numeric($p['edit_emp']);
 $update_employee = isset($p['update_emp']) && isset($p['id']) && is_numeric($p['id']);
 $add_new_employee = isset($p['add_emp']);
 $insert_employee = isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj';
+
+$contract_show_list = isset($p['show_cont_list']);
+$contract_show_item = isset($p['show_cont_item']) && is_numeric($p['show_cont_item']);
 $p['errors'] = [];
 
 // without view
@@ -70,13 +73,12 @@ include "views/menu.php";
 if ($list_employee) {
     $template_name = 'views/employee/list.php';
     $data['page_title'] = "Lista pracowników";
-    $data['all_employee'] = $emp->get_all();
+    $data['all_employees'] = $emp->get_all();
     $displayer->load_view($data, $template_name);
 } elseif ($show_employee) {
     $template_name = 'views/employee/item.php';
     $id = $p['show_emp'];
     $data['emp'] = $emp->get_by_id($id);
-    $data['emp'] =  $data['emp'][0];
     $displayer->load_view($data, $template_name);
 } elseif ($edit_employee) {
     $template_name = 'views/employee/form.php';
@@ -99,9 +101,19 @@ if ($list_employee) {
     $displayer->load_view($data, $template_name);
 }
 
-
-
-
+if ($contract_show_list) {
+    $template_name = 'views/contract/list.php';
+    $data['page_title'] = "Lista umów";
+    $data['all_contracts'] = $cont->get_all();
+    $displayer->load_view($data, $template_name);
+} elseif($contract_show_item){
+    $template_name = 'views/contract/item.php';
+    $id = $p['show_cont_item'];
+    $data['cont'] = $cont->get_by_id($id);
+    $uid =  $data['cont']['uid'];
+    $data['emp'] = $emp->get_by_id($uid);
+    $displayer->load_view($data, $template_name);
+}
 
 
 

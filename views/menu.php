@@ -16,7 +16,7 @@
                 <ul class="nav pull-right">
 
                     <li><a href="?add_emp">Dodaj Pracownika</a></li>
-                    <li><a href="">Umowy</a></li>
+                    <li><a href="?show_cont_list">Umowy</a></li>
                     <li><a href="">Rachunki</a></li>
                 </ul>
             </div><!-- /.nav-collapse -->

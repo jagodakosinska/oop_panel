@@ -10,6 +10,8 @@ class Employee
     {
         $this->db = $db;
     }
+
+
     public function get_all()
     {
 
@@ -31,7 +33,7 @@ class Employee
         if ($result->num_rows > 0) {
             while ($res[] = $result->fetch_assoc()) { }
         }
-        return $res;
+        return $res[0];
     }
 
     public function update_emp($id, $arr)

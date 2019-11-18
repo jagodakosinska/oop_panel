@@ -6,11 +6,11 @@
 <?php 
 //var_dump($data);
 
-foreach($data['all_employees'] as $emp){
+foreach($data['all_contracts'] as $cont){
     ?>
 
 <ul class="employee__list">
-    <li class="employee__item"><a href="?show_emp=<?= $emp['id'] ?>" ><?= $emp['fname'] ?> <?= $emp['lname'] ?></a></li>
+    <li class="employee__item"><a href="?show_cont_item=<?= $cont['id'] ?>" ><?= $cont['full_number'] ?></a></li>
 </ul>
 
 
