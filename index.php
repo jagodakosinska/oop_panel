@@ -1,12 +1,11 @@
 <?php
 
+
+
 include 'config.php';
 include 'database.php';
+include 'autoloader.php';
 
-include('classes/employee.php');
-include('classes/displayer.php');
-include('classes/validator.php');
-include('classes/contract.php');
 
 function dump($val){
 echo '<pre>';
