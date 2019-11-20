@@ -1,12 +1,12 @@
 <?php
 
-class Contract {
+class Contract extends Database{
 
     var $db = null;
 
-public function __construct($db)
+public function __construct()
 {
-    $this->db = $db;
+    $this->db = $this->connect();
 }
 
 public function get_all()

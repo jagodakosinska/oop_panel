@@ -1,14 +1,14 @@
 <?php
 
-class Employee
+class Employee extends Database
 {
 
 
     var $db = null;
 
-    public function __construct($db)
+    public function __construct()
     {
-        $this->db = $db;
+        $this->db = $this->connect();
     }
 
 

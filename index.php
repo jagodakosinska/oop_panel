@@ -1,9 +1,8 @@
 <?php
-
+declare(strict_types = 1);
 
 
 include 'config.php';
-include 'database.php';
 include 'autoloader.php';
 
 
@@ -13,9 +12,9 @@ var_dump($val);
 echo '</pre>';
 }
 //=================  settings ===============
-$db = new Database();
-$emp = new Employee($db);
-$cont = new Contract($db);
+
+$emp = new Employee();
+$cont = new Contract();
 $displayer = new Displayer();
 $valid = new Validator();
 
