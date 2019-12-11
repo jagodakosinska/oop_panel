@@ -3,8 +3,9 @@
    function loadClass($class) {
     $path = 'classes/';
     $extension = '.php';
-    $className = strtolower($class);
-    $filename = $path . $className . $extension;
+   // $className = strtolower($class);
+    // $filename = $path . $className . $extension;
+    $filename = $path . $class . $extension;
     if(!file_exists($filename)){
         return false;
     }
