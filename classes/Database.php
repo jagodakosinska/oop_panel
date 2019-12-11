@@ -12,11 +12,9 @@ class Database
 
     protected function connect()
     {
-
-        $this->conn = null;
-        $this->conn = new mysqli($this->server, $this->userName, $this->password, $this->dbName);
+        $conn = new mysqli($this->server, $this->userName, $this->password, $this->dbName);
         $this->conn->query('SET NAMES utf8mb4');
-        return $this->conn;
+        return $conn;
     }
 
     public function query($sql)
@@ -43,4 +41,9 @@ class Database
     {
         return $this->conn->error;
     }
+
+    public function fetch_assoc(){
+        return $this->conn->fetch_assoc;
+    }
 }
+
