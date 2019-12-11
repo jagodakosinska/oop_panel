@@ -13,10 +13,10 @@ echo '</pre>';
 }
 //=================  settings ===============
 
-$emp = new Employee();
-$cont = new Contract();
-$displayer = new Displayer();
-$valid = new Validator();
+$emp = new EmployeeView();
+// $cont = new Contract();
+// $displayer = new Displayer();
+// $valid = new Validator();
 
 $p = array_merge($_POST, $_GET);
 
@@ -71,8 +71,8 @@ include "views/menu.php";
 if ($list_employee) {
     $template_name = 'views/employee/list.php';
     $data['page_title'] = "Lista pracowników";
-    $data['all_employees'] = $emp->get_all();
-    $displayer->load_view($data, $template_name);
+    $data['all_employees'] = $emp->showEmployees();
+    // $displayer->load_view($data, $template_name);
 } elseif ($show_employee) {
     $template_name = 'views/employee/item.php';
     $id = $p['show_emp'];

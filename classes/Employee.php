@@ -3,14 +3,16 @@
 class Employee extends Database
 {
 
-    public function get_employees(){
+    protected function get_employees(){
         $sql = "SELECT * FROM employee";
-        $result = $this->query($sql);
+        $result = $this->connect()->query($sql);
         $res = array();
         if ($result->num_rows > 0) {
             while ($res[] = $result->fetch_assoc()) { }
         }
         return $res;
+        // mysqli_fetch_all()
+
     }
 
     // var $db = null;
