@@ -17,20 +17,42 @@ echo '</pre>';
 
 //=================  settings ===============
 
-// $empView = new EmployeeView();
-// $empContr = new EmployeeContr();
-// $cont = new Contract();
-// $displayer = new Displayer();
-// $valid = new Validator();
-
-
-
 $empContr = new EmployeeContr();
+$empView = new EmployeeView();
+
+
+
+$p = array_merge($_POST, $_GET);
 
 
 
 
-// $p = array_merge($_POST, $_GET);
+include "views/header.php";
+include "views/menu.php";
+
+
+
+if(empty($p)) {
+    $empView->show_employees();
+}
+
+$p['errors'] = [];
+
+if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {
+    $empView->show_employee($p['show_emp']);
+}
+
+if(isset($p['add_emp'])) {
+    $empView->show_form($p);
+}
+
+if(isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj'){
+    // dump($p['emp']);
+$empContr->create_employee($p);
+}
+
+include("views/footer.php");
+
 
 // $list_employee = empty($p);
 // $show_employee = isset($p['show_emp']) && is_numeric($p['show_emp']);
@@ -38,11 +60,8 @@ $empContr = new EmployeeContr();
 // $update_employee = isset($p['update_emp']) && isset($p['id']) && is_numeric($p['id']);
 // $add_new_employee = isset($p['add_emp']);
 // $insert_employee = isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj';
-
-
 // $contract_show_list = isset($p['show_cont_list']);
 // $contract_show_item = isset($p['show_cont_item']) && is_numeric($p['show_cont_item']);
-// $p['errors'] = [];
 
 // without view
 // if ($update_employee) {
@@ -71,23 +90,7 @@ $empContr = new EmployeeContr();
 //     }
  
 // }
-
-// var_dump($_POST);
-// var_dump($show_employee);
-// die;
-
 // with view
-include "views/header.php";
-include "views/menu.php";
-// var_dump($empContr->p);
-if(empty($empContr->p)) {
-    $empContr->list_employees();
-}
-
-if(isset($empContr->p['show_emp'])) {
-    $empContr->show_employee($empContr->p['show_emp']);
-}
-
 
 // ================   Employee 
 // if ($list_employee) {
@@ -137,23 +140,3 @@ if(isset($empContr->p['show_emp'])) {
 
 
 
-include("views/footer.php");
-// $test = new Widok();
-// echo "\r\n";
-// echo $test->languange;
-
-// $test->write_sth(20, "dupa");
-
-
-// $widoczek = new Widok2();
-// echo $widoczek->languange;
-// $widoczek->tego_tam_nie_ma();
-// $widoczek->cos();
-// $widoczek->write_sth(1, "23");
-
-// $var = $widoczek->get_from_db_and_display();
-// $widoczek->display_data($var, 'views/employee/list.php');
-
-// $widoczek2 = new Widok2();
-
-// $widoczek2->languange;
