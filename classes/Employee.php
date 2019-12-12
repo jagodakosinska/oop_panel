@@ -2,16 +2,25 @@
 
 class Employee extends Database
 {
+    
+    
+    public function __construct()
+    {
+      parent::connect();
+    //   var_dump($this->conn);
+    }
 
-    protected function get_employees(){
+    protected function get_employees()
+    {
         $sql = "SELECT * FROM employee";
-        $result = $this->connect()->query($sql);
+        $result = $this->conn->query($sql);
         $res = array();
         if ($result->num_rows > 0) {
             while ($res[] = $result->fetch_assoc()) { }
         }
         return $res;
         // mysqli_fetch_all()
+    }
 
     }
 
