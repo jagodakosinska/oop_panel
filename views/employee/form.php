@@ -12,7 +12,8 @@
                     <div class="alert alert-danger">
                        <?= $error ?>
                     </div>
-                <?php  }  } ?>
+                <?php  }  }
+                // var_dump($data); ?>
                 </div>
                 <div class="module-body">
 
