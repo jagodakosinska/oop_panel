@@ -50,5 +50,18 @@ class EmployeeContr extends Employee
         $this->displayer($data, $template_name);
     }
 
+    public function add_new_employee()
+    {
+        $q = $this->p;
+        $template_name = 'views/employee/form.php';
+        $data['page_title'] = "Dodaj Pracownika";
+        $data['emp'] = '';
+        $data['submit'] = 'insert_emp';
+        $data['value'] = 'Dodaj';
+        $data['errors'] = $q['errors'];
+        $data['emp'] = isset($q['emp']) && empty($q['emp']) ? $q['emp'] : $data['emp'];
+        $this->displayer->load_view($data, $template_name);
+    }
+
 
 }
