@@ -13,7 +13,10 @@ class Database
     {
         $this->conn = new mysqli($this->server, $this->userName, $this->password, $this->dbName);
         $this->conn->query('SET NAMES utf8mb4');
+        error_log('dupa');
         return $this->conn;
+        
+
     }
 
     // public function query($sql)

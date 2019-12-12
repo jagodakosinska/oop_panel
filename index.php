@@ -17,9 +17,8 @@ echo '</pre>';
 
 //=================  settings ===============
 
-$empContr = new EmployeeContr();
+// $empContr = new EmployeeContr();
 $empView = new EmployeeView();
-
 
 
 $p = array_merge($_POST, $_GET);
@@ -36,6 +35,7 @@ if(empty($p)) {
     $empView->show_employees();
 }
 
+
 $p['errors'] = [];
 
 if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {
@@ -48,7 +48,7 @@ if(isset($p['add_emp'])) {
 
 if(isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj'){
     // dump($p['emp']);
-$empContr->create_employee($p);
+$empView->create_employee($p);
 }
 
 include("views/footer.php");

@@ -49,8 +49,8 @@ class Employee extends Database
         $val = array_values($data);
         $sql = "INSERT INTO `employee` (" . implode(', ', $key) . ") "
             . "VALUES ('" . implode("', '", $val) . "')";
-        $this->db->query($sql);
-        $id = $this->db->insert_id();
+        $this->conn->query($sql);
+        $id = $this->conn->insert_id();
         return $id;
     }
 
@@ -74,12 +74,7 @@ class Employee extends Database
 
     // public function get_by_id($id)
     // {
-
-    //     $sql = "SELECT * FROM employee WHERE id=$id";
-    //     $result = $this->db->query($sql);
-    //     $res = array();
-    //     if ($result->num_rows > 0) {
-    //         while ($res[] = $result->fetch_assoc()) { }
+  // $this->empContr = new EmployeeContr();
     //     }
     //     return $res[0];
     // }
