@@ -1,10 +1,48 @@
 <?php
 
-class EmployeeView extends Employee{
+class EmployeeView extends Employee
+{
+
+    var $displayer;
 
 
-    public function showEmployees(){
-    $result = $this->get_employees();
-    return $result;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->displayer = new Displayer();
+    }
+
+    public function displayer($data, $template_name)
+    {
+        $this->displayer->load_view($data, $template_name);
+    }
+
+    public function show_employees()
+    {
+        $template_name = 'views/employee/list.php';
+        $data['page_title'] = "Lista pracowników";
+        $data['all_employees'] = $this->get_employees();
+        $this->displayer($data, $template_name);
+    }
+
+
+    public function show_employee($id)
+    {
+        $template_name = 'views/employee/item.php';
+        $data['emp'] = $this->get_by_id($id);
+        $this->displayer($data, $template_name);
+    }
+
+    public function show_form($p)
+    {
+        $template_name = 'views/employee/form.php';
+        $data['page_title'] = "Dodaj Pracownika";
+        $data['emp'] = '';
+        $data['submit'] = 'insert_emp';
+        $data['value'] = 'Dodaj';
+        $data['errors'] = $p['errors'];
+        $data['emp'] = isset($p['emp']) && !empty($p['emp']) ? $p['emp'] : $data['emp'];
+        // dump($p);
+        $this->displayer($data, $template_name);
     }
 }
