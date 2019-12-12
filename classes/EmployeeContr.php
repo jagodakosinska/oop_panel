@@ -5,8 +5,8 @@ class EmployeeContr extends Employee
 
     var $empView;
     var $valid;
-  
-    
+
+
 
     public function __construct()
     {
@@ -23,17 +23,28 @@ class EmployeeContr extends Employee
     }
 
 
+    public function show_employees()
+    {
+        $result = $this->get_employees();
+        return $result;
+    }
+
+    public function show_employee($id){
+        $result = $this->get_by_id($id);
+        return $result;
+    }
+
     public function create_employee($arr)
     {
         // dump($arr);
         $res = $this->validation_data($arr['emp']);
-        
+
         if ($res['status'] === true) {
             $id = $this->set_employee($res);
             $this->empView->show_employee($id);
         } else {
             $arr['errors'] = $res['data'];
-            
+
             $this->empView->show_form($arr);
         }
     }

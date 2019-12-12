@@ -4,12 +4,14 @@ class EmployeeView extends Employee
 {
 
     var $displayer;
-
+    var $empContr;
 
     public function __construct()
     {
         parent::__construct();
         $this->displayer = new Displayer();
+        $this->empContr = new EmployeeContr();
+
     }
 
     public function displayer($data, $template_name)
@@ -21,7 +23,8 @@ class EmployeeView extends Employee
     {
         $template_name = 'views/employee/list.php';
         $data['page_title'] = "Lista pracowników";
-        $data['all_employees'] = $this->get_employees();
+        // $data['all_employees'] = $this->get_employees();
+        $data['all_employees'] = $this->empContr->show_employees();
         $this->displayer($data, $template_name);
     }
 
@@ -29,7 +32,8 @@ class EmployeeView extends Employee
     public function show_employee($id)
     {
         $template_name = 'views/employee/item.php';
-        $data['emp'] = $this->get_by_id($id);
+        // $data['emp'] = $this->get_by_id($id);
+        $data['emp'] = $this->empContr->show_employee($id);
         $this->displayer($data, $template_name);
     }
 

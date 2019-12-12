@@ -26,7 +26,6 @@ class Employee extends Database
     {
         $sql = "SELECT * FROM employee WHERE id=$id";
         $result = $this->conn->query($sql);
-        // var_dump($result);
         $res = array();
         if ($result->num_rows > 0) {
             while ($res[] = $result->fetch_assoc()) { }
