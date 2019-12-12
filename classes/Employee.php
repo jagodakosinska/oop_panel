@@ -24,7 +24,6 @@ class Employee extends Database
 
     protected function get_by_id($id)
     {
-       
         $sql = "SELECT * FROM employee WHERE id=$id";
         $result = $this->conn->query($sql);
         // var_dump($result);
