@@ -22,9 +22,39 @@ class Employee extends Database
         // mysqli_fetch_all()
     }
 
+    protected function get_by_id($id)
+    {
+       
+        $sql = "SELECT * FROM employee WHERE id=$id";
+        $result = $this->conn->query($sql);
+        // var_dump($result);
+        $res = array();
+        if ($result->num_rows > 0) {
+            while ($res[] = $result->fetch_assoc()) { }
+        }
+        return $res[0];
     }
 
-    // var $db = null;
+    protected function set_employee($arr)
+    {
+        $arr = explode(', ', $arr['data']);
+        $data = [];
+        foreach ($arr as $item) {
+            $item = trim($item);
+            preg_match("@`(.*?)`.?=.?'(.*?)'@", $item, $rg);
+            if (isset($rg[1])) {
+                $data[$rg[1]] = $rg[2];
+            }
+        }
+
+        $key = array_keys($data);
+        $val = array_values($data);
+        $sql = "INSERT INTO `employee` (" . implode(', ', $key) . ") "
+            . "VALUES ('" . implode("', '", $val) . "')";
+        $this->db->query($sql);
+        $id = $this->db->insert_id();
+        return $id;
+    }
 
     // public function __construct()
     // {
