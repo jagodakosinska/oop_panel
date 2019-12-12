@@ -40,4 +40,15 @@ class EmployeeContr extends Employee
         $this->displayer($data, $template_name);
     }
 
+    public function show_employee($id = null)
+    {
+        if(is_null($id)){
+            $id = $this->p['show_emp'];
+        }
+        $template_name = 'views/employee/item.php';
+        $data['emp'] = $this->get_by_id($id);
+        $this->displayer($data, $template_name);
+    }
+
+
 }
