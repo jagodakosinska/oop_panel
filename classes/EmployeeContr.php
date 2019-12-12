@@ -4,87 +4,39 @@ class EmployeeContr extends Employee
 {
 
     var $empView;
-    var $displayer;
     var $valid;
-    var $p;
+  
     
 
     public function __construct()
     {
         parent::__construct();
-        // include 'autoloader.php';
         $this->empView = new EmployeeView();
-        $this->displayer = new Displayer();
         $this->valid = new Validator();
-        $this->p = array_merge($_POST, $_GET);
-        // $this->p['errors'] = [];
     }
 
-    public function validation_data()
+    public function validation_data($arr)
     {
 
-        $arr = $this->valid->valid_employee($this->p['emp']);
-        return $arr;
+        $res = $this->valid->valid_employee($arr);
+        return $res;
     }
 
-    public function displayer($data, $template_name)
-    {
-        $this->displayer->load_view($data, $template_name);
-    }
 
-    public function list_employees()
+    public function create_employee($arr)
     {
-        $template_name = 'views/employee/list.php';
-        $data['page_title'] = "Lista pracowników";
-        $data['all_employees'] = $this->empView->showEmployees();
-        $this->displayer($data, $template_name);
-    }
-
-    public function show_employee($id = null)
-    {
-        if(is_null($id)){
-            $id = $this->p['show_emp'];
-        }
-        $template_name = 'views/employee/item.php';
-        $data['emp'] = $this->get_by_id($id);
-        $this->displayer($data, $template_name);
-    }
-
-    public function add_new_employee()
-    {
-        $q = $this->p;
-        $template_name = 'views/employee/form.php';
-        $data['page_title'] = "Dodaj Pracownika";
-        $data['emp'] = '';
-        $data['submit'] = 'insert_emp';
-        $data['value'] = 'Dodaj';
-        $data['errors'] = $q['errors'];
-        $data['emp'] = isset($q['emp']) && empty($q['emp']) ? $q['emp'] : $data['emp'];
-        $this->displayer->load_view($data, $template_name);
-    }
-
-    public function create_employee()
-    {
-        $arr = $this->validation_data();
-        if ($arr['status'] === true) {
-            $id = $this->set_employee($arr);
-            $this->show_employee($id);
+        // dump($arr);
+        $res = $this->validation_data($arr['emp']);
+        
+        if ($res['status'] === true) {
+            $id = $this->set_employee($res);
+            $this->empView->show_employee($id);
         } else {
-            $this->p['errors'] = $arr['data'];
-            $this->add_new_employee();
+            $arr['errors'] = $res['data'];
+            
+            $this->empView->show_form($arr);
         }
     }
-
-
-
-    // $list_employee = empty($p);
-    // $show_employee = isset($p['show_emp']) && is_numeric($p['show_emp']);
-    // $edit_employee = isset($p['edit_emp']) && is_numeric($p['edit_emp']);
-    // $update_employee = isset($p['update_emp']) && isset($p['id']) && is_numeric($p['id']);
-    // $add_new_employee = isset($p['add_emp']);
-    // $insert_employee = isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj';
-
-    // without view
 
     // if ($update_employee) {
     //     $id = $p['id'];
