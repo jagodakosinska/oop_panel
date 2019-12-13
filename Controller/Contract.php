@@ -1,35 +1,48 @@
 <?php
 
-class Contract extends Database{
-
-    var $db = null;
-
-public function __construct()
+class Contract extends Contract_M
 {
-    $this->db = $this->connect();
-}
+    var $empM;
+    var $valid;
+    var $displayer;
 
-public function get_all()
+    public function __construct()
     {
-        $sql = "SELECT * FROM `contract`";
-        $result = $this->db->query($sql);
-        $res = array();
-        if ($result->num_rows > 0) {
-            while ($res[] = $result->fetch_assoc()) { }
-        }
+        parent::__construct();
+        $this->empM = new Employee_M();
+        $this->displayer = new Displayer();
+        $this->valid = new Validator();
+    }
+
+    public function validation_data($arr)
+    {
+
+        $res = $this->valid->valid_employee($arr);
         return $res;
     }
 
-    public function get_by_id($id)
-    {
 
-        $sql = "SELECT * FROM `contract` WHERE id=$id";
-        $result = $this->db->query($sql);
-        $res = array();
-        if ($result->num_rows > 0) {
-            while ($res[] = $result->fetch_assoc()) { }
-        }
-        return $res[0];
+    public function displayer($data, $template_name)
+    {
+        $this->displayer->load_view($data, $template_name);
     }
 
+
+    public function show_all()
+    {
+        $template_name = 'views/contract/list.php';
+        $data['page_title'] = "Lista umów";
+        $data['all_contracts'] = $this->get_all();
+        $this->displayer($data, $template_name);
+    }
+
+    public function show_contract($id)
+    {
+        $template_name = 'views/contract/item.php';
+        $data['cont'] = $this->get_by_id($id);
+        $uid =  $data['cont']['uid'];
+        $data['emp'] = $this->empM->get_by_id($uid);
+        // dump($data['emp']);
+        $this->displayer($data, $template_name);
+    }
 }

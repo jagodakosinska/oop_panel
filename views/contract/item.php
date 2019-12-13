@@ -1,5 +1,5 @@
 <div class='page-header'>
-        <h1><?= $data['emp']['fname'] ?> <?= $data['emp']['lname'] ?></h1>
+        <h1 class="contract__title"><?= $data['emp']['fname'] ?> <?= $data['emp']['lname'] ?></h1>
     </div>
 
 <?php 
@@ -15,6 +15,6 @@
     <li class="employee__item"><span>Przedmiot umowy: </span><?= $data['cont']['title'] ?></li>
 
 </ul>
-<div class="employee__button">
+<div class="contract__button">
 <a class="btn btn-primary"  href="?edit_emp=<?= $data['cont']['id'] ?>">Edycja</a>
 </div>

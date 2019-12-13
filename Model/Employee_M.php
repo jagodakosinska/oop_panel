@@ -7,10 +7,9 @@ class Employee_M extends Database
     public function __construct()
     {
       parent::connect();
-    //   var_dump($this->conn);
     }
 
-    protected function get_employees()
+    public function get_all()
     {
         $sql = "SELECT * FROM employee";
         $result = $this->conn->query($sql);
@@ -22,7 +21,7 @@ class Employee_M extends Database
         // mysqli_fetch_all()
     }
 
-    protected function get_by_id($id)
+    public function get_by_id($id)
     {
         $sql = "SELECT * FROM employee WHERE id=$id";
         $result = $this->conn->query($sql);
@@ -33,7 +32,7 @@ class Employee_M extends Database
         return $res[0];
     }
 
-    protected function insert_employee($arr)
+    public function insert_employee($arr)
     {
         $arr = explode(', ', $arr['data']);
         $data = [];
@@ -54,7 +53,7 @@ class Employee_M extends Database
         return $id;
     }
 
-    protected function update_employee($id, $arr)
+    public function update_employee($id, $arr)
     {
         $sql = "UPDATE `employee` SET $arr WHERE id=$id";
         $res = $this->conn->query($sql);

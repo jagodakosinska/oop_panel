@@ -26,11 +26,11 @@ class Employee extends Employee_M
         $this->displayer->load_view($data, $template_name);
     }
 
-    public function show_employees()
+    public function show_all()
     {
         $template_name = 'views/employee/list.php';
         $data['page_title'] = "Lista pracowników";
-        $data['all_employees'] = $this->get_employees();
+        $data['all_employees'] = $this->get_all();
         $this->displayer($data, $template_name);
     }
 
