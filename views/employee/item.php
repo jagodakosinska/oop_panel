@@ -34,3 +34,25 @@
 <div class="employee__button">
 <a class="btn btn-primary"  href="?edit_emp=<?= $data['emp']['id'] ?>">Edycja</a>
 </div>
+
+
+<div class="employee__contracts"> 
+    <p> Umowy pracownika:</p>
+   <ul>
+   <?php
+//    dump($data);
+   if(isset($data['cont'])){ 
+       foreach($data['cont'] as $cont){ ?>
+        <li class="contract__item"> <a href="?show_item=<?= $cont['id'] ?>" ><?= $cont->full_number ?></a></li>
+      <?php } ?>
+   </ul>
+   <?php } else { ?>
+    <p>brak umów dla tego pracownika w wybranym okresie <?php // $month . "/" . $year ?></p>
+ <?php  } ?>
+ </div>
+    <hr>
+    <div class="employee__button">
+        <a class="btn btn-secondary" href="?add_cont=<?= $data['emp']['id'] ?>&task_contract=<?= $data['emp']['task_contract'] ?>">Dodaj umowę</a>
+        <a class="btn btn-primary" href="?edit_emp=<?= $data['emp']['id'] ?>">Edycja</a>
+    </div>
+</div>

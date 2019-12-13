@@ -30,7 +30,6 @@ if(empty($p)) {
     $emp->show_all();
 }
 
-
 $p['errors'] = [];
 
 if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {
@@ -60,6 +59,17 @@ if(isset($p['show_contracts'])){
 if(isset($p['show_cont_item']) && is_numeric($p['show_cont_item'])){
     $contr->show_contract($p["show_cont_item"]);
 }
+
+if(isset($p['add_cont'])){
+    dump($p);
+    $contr->show_form($p);
+}
+
+
+if(isset($p['insert_cont']) && $p['insert_emp'] === 'Dodaj'){
+    $contr->create_contract($p);
+}
+
 
 include("views/footer.php");
 

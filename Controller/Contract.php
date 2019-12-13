@@ -45,4 +45,20 @@ class Contract extends Contract_M
         // dump($data['emp']);
         $this->displayer($data, $template_name);
     }
+
+    public function show_form($p){
+        $template_name = 'views/contract/form.php';
+        $data['page_title'] = "Dodaj Umowę";
+        $data['cont'] = '';
+        $data['submit'] = 'insert_cont';
+        $data['value'] = 'Dodaj';
+        $data['errors'] = $p['errors'];
+        $data['cont'] = isset($p['cont']) && !empty($p['cont']) ? $p['cont'] : $data['cont'];
+        // dump($p);
+        $this->displayer($data, $template_name);
+    }
+
+    public function create_contract($p){
+        
+    }
 }
