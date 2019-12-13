@@ -17,7 +17,7 @@ class Contract extends Contract_M
     public function validation_data($arr)
     {
 
-        $res = $this->valid->valid_employee($arr);
+        $res = $this->valid->valid_contract($arr);
         return $res;
     }
 
@@ -58,7 +58,14 @@ class Contract extends Contract_M
         $this->displayer($data, $template_name);
     }
 
-    public function create_contract($p){
-        
+    public function create_contract($arr){
+        $res = $this->validation_data($arr['cont']);
+        if ($res['status'] === true) {
+            $id = $this->Contract_M->insert_contract($res);
+            $this->show_contract($id);
+        } else {
+            $arr['errors'] = $res['data'];
+            $this->show_form($arr);
+        }
     }
 }

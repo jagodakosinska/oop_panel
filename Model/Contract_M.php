@@ -31,4 +31,10 @@ class Contract_M extends Database
         }
         return $res[0];
     }
+
+    public function insert_contract($arr){
+
+    }
+
+    
 }
