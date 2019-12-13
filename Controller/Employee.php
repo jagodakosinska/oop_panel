@@ -69,6 +69,17 @@ class Employee extends Employee_M
         }
     }
 
+        public function edit_employee($p) {
+        $template_name = 'views/employee/form.php';
+        $data['page_title'] = "Edycja Pracownika";
+        $id = $p['edit_emp'];
+        $data['submit']  = 'update_emp';
+        $data['value'] = 'Edytuj';
+        $data['errors'] = $p['errors'];
+        $data['emp'] = isset($p['emp']) && empty($p['emp']) ? $p['emp'] :  $this->get_by_id($id);
+        $this->displayer($data, $template_name);
+        }
+
     // if ($update_employee) {
     //     $id = $p['id'];
     //     $arr = $valid->valid_employee($p['emp']);
@@ -92,16 +103,6 @@ class Employee extends Employee_M
     //     // $data['emp'] = ;
     //     $data['emp'] = isset($p['emp']) && empty($p['emp']) ? $p['emp'] :  $emp->get_by_id($id)[0];
     //     $displayer->load_view($data, $template_name);
-    // } elseif ($add_new_employee) {
-    //     $template_name = 'views/employee/form.php';
-    //     $data['page_title'] = "Dodaj Pracownika";
-    //     $data['emp'] = '';
-    //     $data['submit'] = 'insert_emp';
-    //     $data['value'] = 'Dodaj';
-    //     $data['errors'] = $p['errors'];
-    //     $data['emp'] = isset($p['emp']) && empty($p['emp']) ? $p['emp'] : $data['emp'];
-    //     $displayer->load_view($data, $template_name);
-    // }
 
 
 }

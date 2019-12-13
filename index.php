@@ -14,6 +14,7 @@ echo '</pre>';
 
 // Create New Instance
 $emp = new Employee();
+$contr = new Contract();
 
 
 
@@ -44,6 +45,12 @@ if(isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj'){
     // dump($p['emp']);
 $emp->create_employee($p);
 }
+
+if(isset($p['edit_emp']) && is_numeric($p['edit_emp'])){
+    $emp->edit_employee($p);
+}
+// if(isset($p['show_cont_list']))
+
 
 include("views/footer.php");
 
