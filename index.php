@@ -1,11 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-
 include 'config.php';
 include 'autoloader.php';
 
-
+//Supporting functions
 function dump($val){
 echo '<pre>';
 var_dump($val);
@@ -13,45 +12,44 @@ echo '</pre>';
 }
 
 
+// Create New Instance
+$emp = new Employee();
 
-
-//=================  settings ===============
-
-// $empContr = new EmployeeContr();
-$empView = new EmployeeView();
 
 
 $p = array_merge($_POST, $_GET);
 
-
-
-
+//Include Views
 include "views/header.php";
 include "views/menu.php";
 
 
 
 if(empty($p)) {
-    $empView->show_employees();
+    $emp->show_employees();
 }
 
 
 $p['errors'] = [];
 
 if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {
-    $empView->show_employee($p['show_emp']);
+    $emp->show_employee($p['show_emp']);
 }
 
 if(isset($p['add_emp'])) {
-    $empView->show_form($p);
+    $emp->show_form($p);
 }
 
 if(isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj'){
     // dump($p['emp']);
-$empView->create_employee($p);
+$emp->create_employee($p);
 }
 
 include("views/footer.php");
+
+
+
+
 
 
 // $list_employee = empty($p);

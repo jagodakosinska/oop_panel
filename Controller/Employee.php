@@ -1,16 +1,15 @@
 <?php
 
-class EmployeeContr extends Employee
+class Employee extends Employee_M
 {
 
-    var $empView;
     var $valid;
+    var $displayer;
 
     public function __construct()
     {
         parent::__construct();
-        // $this->empView = new EmployeeView();
-        // $this->empView->conn = $this->conn;
+        $this->displayer = new Displayer();
         $this->valid = new Validator();
     }
 
@@ -22,29 +21,51 @@ class EmployeeContr extends Employee
     }
 
 
-    // public function show_employees()
-    // {
-    //     $result = $this->get_employees();
-    //     return $result;
-    // }
+    public function displayer($data, $template_name)
+    {
+        $this->displayer->load_view($data, $template_name);
+    }
 
-    // public function show_employee($id){
-    //     $result = $this->get_by_id($id);
-    //     return $result;
-    // }
+    public function show_employees()
+    {
+        $template_name = 'views/employee/list.php';
+        $data['page_title'] = "Lista pracowników";
+        $data['all_employees'] = $this->get_employees();
+        $this->displayer($data, $template_name);
+    }
+
+
+    public function show_employee($id)
+    {
+        $template_name = 'views/employee/item.php';
+        $data['emp'] = $this->get_by_id($id);
+        $this->displayer($data, $template_name);
+    }
+
+    public function show_form($p)
+    {
+        $template_name = 'views/employee/form.php';
+        $data['page_title'] = "Dodaj Pracownika";
+        $data['emp'] = '';
+        $data['submit'] = 'insert_emp';
+        $data['value'] = 'Dodaj';
+        $data['errors'] = $p['errors'];
+        $data['emp'] = isset($p['emp']) && !empty($p['emp']) ? $p['emp'] : $data['emp'];
+        // dump($p);
+        $this->displayer($data, $template_name);
+    }
 
     public function create_employee($arr)
     {
-        // dump($arr);
         $res = $this->validation_data($arr['emp']);
 
         if ($res['status'] === true) {
             $id = $this->set_employee($res);
-            $this->empView->show_employee($id);
+            $this->show_employee($id);
         } else {
             $arr['errors'] = $res['data'];
 
-            $this->empView->show_form($arr);
+            $this->show_form($arr);
         }
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class Employee extends Database
+class Employee_M extends Database
 {
     
     
