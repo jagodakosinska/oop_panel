@@ -58,51 +58,37 @@ class Employee extends Employee_M
     public function create_employee($arr)
     {
         $res = $this->validation_data($arr['emp']);
-
         if ($res['status'] === true) {
-            $id = $this->set_employee($res);
+            $id = $this->insert_employee($res);
             $this->show_employee($id);
         } else {
             $arr['errors'] = $res['data'];
-
             $this->show_form($arr);
         }
     }
 
-        public function edit_employee($p) {
+    public function edit_employee($p)
+    {
         $template_name = 'views/employee/form.php';
         $data['page_title'] = "Edycja Pracownika";
         $id = $p['edit_emp'];
         $data['submit']  = 'update_emp';
         $data['value'] = 'Edytuj';
         $data['errors'] = $p['errors'];
-        $data['emp'] = isset($p['emp']) && empty($p['emp']) ? $p['emp'] :  $this->get_by_id($id);
+        $data['emp'] = isset($p['emp']) && empty($p['emp']) ? $p['emp'] : $this->get_by_id($id);
         $this->displayer($data, $template_name);
+    }
+
+    public function set_employee($arr)
+    {
+        $id = $arr['id'];
+        $res = $this->validation_data($arr['emp']);
+        if ($res['status'] === true) {
+            $this->update_employee($id, $res['data']);
+            $this->show_employee($id);
+        } else {
+            $arr['errors'] = $res['data'];
+            $this->edit_employee($arr);
         }
-
-    // if ($update_employee) {
-    //     $id = $p['id'];
-    //     $arr = $valid->valid_employee($p['emp']);
-    //     if ($arr['status'] === true) {
-    //         $emp->update_emp($id, $arr['data']);
-    //         $show_employee = true;
-    //     $p['show_emp'] = $p['id'];
-    //     }else{
-    //         $p['edit_emp'] = $p['id'];
-    //         $p['errors'] = $arr['data'];
-    //         $edit_employee = true;
-    //     }
-    // ================   Employee 
-    // if ($edit_employee) {
-    //     $template_name = 'views/employee/form.php';
-    //     $data['page_title'] = "Edycja Pracownika";
-    //     $id = $p['edit_emp'];
-    //     $data['submit']  = 'update_emp';
-    //     $data['value'] = 'Edytuj';
-    //     $data['errors'] = $p['errors'];
-    //     // $data['emp'] = ;
-    //     $data['emp'] = isset($p['emp']) && empty($p['emp']) ? $p['emp'] :  $emp->get_by_id($id)[0];
-    //     $displayer->load_view($data, $template_name);
-
-
+    }
 }

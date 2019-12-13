@@ -49,6 +49,10 @@ $emp->create_employee($p);
 if(isset($p['edit_emp']) && is_numeric($p['edit_emp'])){
     $emp->edit_employee($p);
 }
+
+if(isset($p['update_emp']) && isset($p['id']) && is_numeric($p['id'])){
+    $emp->set_employee($p);
+}
 // if(isset($p['show_cont_list']))
 
 
