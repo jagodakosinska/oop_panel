@@ -31,10 +31,6 @@
     <li class="employee__item"><span>Nr konta: </span> <?= $data['emp']['bank_acc'] ?></li>
     <li class="employee__item"><span>Rodzaj płatności: </span> <?= $data['emp']['bank_transfer'] == 1 ? 'Przelew' : 'Gotówka' ?></li>
 </ul>
-<div class="employee__button">
-<a class="btn btn-primary"  href="?edit_emp=<?= $data['emp']['id'] ?>">Edycja</a>
-</div>
-
 
 <div class="employee__contracts"> 
     <p> Umowy pracownika:</p>

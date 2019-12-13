@@ -15,7 +15,7 @@ echo '</pre>';
 // Create New Instance
 $emp = new Employee();
 $contr = new Contract();
-
+$api = new Api();
 
 
 $p = array_merge($_POST, $_GET);
@@ -61,7 +61,7 @@ if(isset($p['show_cont_item']) && is_numeric($p['show_cont_item'])){
 }
 
 if(isset($p['add_cont'])){
-    dump($p);
+    // dump($p);
     $contr->show_form($p);
 }
 
