@@ -49,7 +49,8 @@ class Employee_M extends Database
         $sql = "INSERT INTO `employee` (" . implode(', ', $key) . ") "
             . "VALUES ('" . implode("', '", $val) . "')";
         $this->conn->query($sql);
-        $id = $this->conn->insert_id();
+        $sql2 = 
+        $id = $this->conn->insert_id;
         return $id;
     }
 

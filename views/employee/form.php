@@ -1,7 +1,7 @@
 <div class='page-header'>
 <h1><?= $data['page_title'] ?></h1>
     </div>
-<?php //var_dump($this) ?>
+<?php  ?>
 <div class="span9">
         <div class="content">
 
@@ -12,8 +12,7 @@
                     <div class="alert alert-danger">
                        <?= $error ?>
                     </div>
-                <?php  }  }
-                // var_dump($data); ?>
+                <?php  }  } ?>
                 </div>
                 <div class="module-body">
 

@@ -21,6 +21,7 @@
     <link type="text/css" rel="stylesheet" href="assets/images/icons/css/font-awesome.css">
     <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+   
 </head>
 
 <body>

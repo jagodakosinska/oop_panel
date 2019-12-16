@@ -4,7 +4,7 @@
     </div>
 
 <?php 
-// dump($data);
+
 
 foreach($data['all_contracts'] as $cont){
     ?>

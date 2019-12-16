@@ -33,16 +33,47 @@ class Contract_M extends Database
         return $res[0];
     }
 
-    public function insert_contract($arr){
-        // $month = $this->check_period($arr['bdate']);
-        // $number = $this->set_number($month);
-        // $num = $number->number + 1;
-        // $arr['number'] = $num;
-        // $arr['full_number'] = $task . '/' . $num . '/' . $month . '/' .  date('Y');
-        // $this->db->insert('contract', $arr);
-        // $id = $this->db->insert_id();
-        // return $id;
+    function insert_contract($arr, $task)
+    {
+
+        $month = $this->check_period($arr['bdate']);
+        $num = $this->get_next_number($month);
+        $arr['number'] = $num;
+        $arr['full_number'] = $task . '/' . $num . '/' . $month . '/' .  date('Y');
+        $key = array_keys($arr);
+        $val = array_values($arr);
+        $sql = "INSERT INTO `contract` (" . implode(', ', $key) . ") "
+            . "VALUES ('" . implode("', '", $val) . "')";
+        $res = $this->conn->query($sql);
+        $id = $this->conn->insert_id;
+        return $id;
     }
 
+    function check_period($bdate)
+    {
+        $act_month = $_SESSION['month'];
+        $selected_month = date('m', strtotime($bdate));
+        return $act_month !== $selected_month ? $selected_month : $act_month;
+    }
 
+    function get_next_number($month)
+    {
+        $sql = "SELECT MAX(`number`) as max FROM `contract` WHERE MONTH(`bdate`)=$month";
+        $result = $this->conn->query($sql);
+        $res = $result->fetch_assoc();
+        $number = is_null($res['max']) ? 0 : $res['max'];
+        return $number + 1;
+    }
+
+    public function update_contract($id, $arr){
+      
+        $res = [];
+        foreach ($arr as $key => $value) {
+            $res['data'][] = "`" . $key . "`= '" . $value . "'";
+        }
+        $res = join(', ', $res['data']);
+        $sql = "UPDATE `contract` SET $res WHERE id=$id";
+        $res = $this->conn->query($sql);
+        return $res;
+    }
 }

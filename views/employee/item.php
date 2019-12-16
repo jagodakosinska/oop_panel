@@ -3,7 +3,7 @@
     </div>
 
 <?php 
-//var_dump($data);
+
 
     ?>
 
@@ -36,7 +36,7 @@
     <p> Umowy pracownika:</p>
    <ul>
    <?php
-//    dump($data);
+
    if(isset($data['cont'])){ 
        foreach($data['cont'] as $cont){ ?>
         <li class="contract__item"> <a href="?show_item=<?= $cont['id'] ?>" ><?= $cont->full_number ?></a></li>
