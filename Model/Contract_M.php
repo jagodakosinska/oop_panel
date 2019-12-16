@@ -12,7 +12,8 @@ class Contract_M extends Database
 
     public function get_all()
     {
-        $sql = "SELECT * FROM `contract`";
+        $year = $_SESSION['year'];
+        $sql = "SELECT * FROM `contract` WHERE YEAR(`bdate`)=$year";
         $result = $this->conn->query($sql);
         $res = array();
         if ($result->num_rows > 0) {

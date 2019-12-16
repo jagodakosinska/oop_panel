@@ -31,6 +31,7 @@ class Employee extends Employee_M
         $template_name = 'views/employee/list.php';
         $data['page_title'] = "Lista pracowników";
         $data['all_employees'] = $this->get_all();
+
         $this->displayer($data, $template_name);
     }
 
@@ -51,7 +52,6 @@ class Employee extends Employee_M
         $data['value'] = 'Dodaj';
         $data['errors'] = $p['errors'];
         $data['emp'] = isset($p['emp']) && !empty($p['emp']) ? $p['emp'] : $data['emp'];
-        // dump($p);
         $this->displayer($data, $template_name);
     }
 
@@ -75,7 +75,7 @@ class Employee extends Employee_M
         $data['submit']  = 'update_emp';
         $data['value'] = 'Edytuj';
         $data['errors'] = $p['errors'];
-        $data['emp'] = isset($p['emp']) && empty($p['emp']) ? $p['emp'] : $this->get_by_id($id);
+        $data['emp'] = isset($p['emp']) && !empty($p['emp']) ? $p['emp'] : $this->get_by_id($id);
         $this->displayer($data, $template_name);
     }
 

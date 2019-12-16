@@ -82,10 +82,8 @@ class Validator
             'uid' => $uid
         ];
 
-        foreach ($arr as $key => $value) {
-            $res['data'][] = "`" . $key . "`= '" . $value . "'";
-        }
-        $res['data'] = join(', ', $res['data']);
+        $res['data'] = $arr;
+        $res['task'] = $task;
         return $res;
     }
 

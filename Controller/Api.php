@@ -3,6 +3,7 @@
 class Api
 {
 
+
     public function __construct()
     { }
 
@@ -35,7 +36,6 @@ class Api
 
     public function session_data()
     {
-        session_start();
 
         if (!isset($_SESSION['year'])) {
             $this->set_userdata('year', date('Y'));
@@ -70,39 +70,30 @@ class Api
 
 
         $this->data = [
-            'year' =>  $this->session->year,
-            'month' =>  $this->session->month,
-            'params' => $this->session->params,
+            'year' =>  $_SESSION['year'],
+            'month' =>  $_SESSION['month'],
+            'params' => $_SESSION['params'],
 
         ];
+
 
         return $this->data;
     }
 
+    function change_year($year)
+    {
+        if (is_numeric($year)) {
+            $this->set_userdata('year',  $year);
+        }
+    }
 
-  
+
+   
 
     // if (!(isset($this->session->user) && $this->session->user['logged_in'])) {
     //     // redirect('login/login');
     // }
 
 
-    // function change_year()
-    // {
-    //     if ($this->input->post('year')) {
-    //         $this->session->set_userdata('year',  $this->input->post('year'));
-    //         $data['contract'] = $this->Contract_M->show_list();
-    //         return $this->load->view('contract/contract_list', $data, false);
-    //     }
-    // }
-
-    // function change_month()
-    // {
-    //     if ($this->input->post('month')) {
-    //         $this->session->set_userdata('month',  $this->input->post('month'));
-    //         $data['contract'] = $this->Contract_M->show_list();
-    //         return $this->load->view('contract/contract_list', $data, false);
-    //     }
-    // }
 
 }
