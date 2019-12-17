@@ -2,6 +2,7 @@
 // declare(strict_types = 1);
 
 include 'config.php';
+include 'database.php';
 include 'autoloader.php';
 
 //Supporting functions

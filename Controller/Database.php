@@ -7,8 +7,8 @@ class Database
     private $password = 'root';
     private $dbName = 'contract';
     var $conn;
-    // conection
 
+    // conection
     protected function connect()
     {
         $this->conn = new mysqli($this->server, $this->userName, $this->password, $this->dbName);
