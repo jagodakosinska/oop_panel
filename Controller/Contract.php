@@ -46,7 +46,7 @@ class Contract extends Contract_M
         $this->displayer($data, $template_name);
     }
 
-    public function show_form($p)
+    public function add_contract($p)
     {
         $template_name = 'views/contract/form.php';
         $data['page_title'] = "Dodaj Umowę";
@@ -68,7 +68,7 @@ class Contract extends Contract_M
             $this->show_contract($id);
         } else {
             $arr['errors'] = $res['data'];
-            $this->show_form($arr);
+            $this->add_contract($arr);
         }
     }
 

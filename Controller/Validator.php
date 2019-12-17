@@ -51,7 +51,7 @@ class Validator
             'cost_pcent' => $cost_pcent,
             'bank_transfer' => $bank_transfer,
             'task_contract' => $task_contract,
-            
+
         ];
 
         foreach ($arr as $key => $value) {
@@ -63,7 +63,7 @@ class Validator
 
 
     public function valid_contract($cont)
-    { 
+    {
         $err = [];
         // $format = 'Y-m-d';
         $bdate = trim($cont['bdate']);
@@ -107,5 +107,42 @@ class Validator
         return $res;
         // $d = DateTime::createFromFormat($format, $date);
         // return $d && $d->format($format) === $date;
+    }
+
+
+    function valid_bill($bill)
+    {
+
+
+        $err = [];
+        // $format = 'Y-m-d';
+        $bill_date = trim($bill['bill_date']);
+        if (empty($bill_date)) $err[] = 'Data nie może być pusta';
+        $netto = trim($bill['netto']);
+        if (empty($netto)) $err[] = 'Kwota netto nie może być pusta';
+        $cont_id = trim($bill['cont_id']);
+        if (empty($cont_id)) $err[] = 'Nie ma takiego pracownika';
+        $cost_pcent = trim($bill['cost_pcent']);
+        $bank_transfer = trim($bill['bank_transfer']);
+
+
+        $res = [];
+        $res['status'] = true;
+        $res['data'] = [];
+        if (count($err)) {
+            $res['status'] = false;
+            $res['data'] = $err;
+            return $res;
+        }
+        $arr = [
+            'bill_date' => $bill_date,
+            'netto' => $netto,
+            'cost_pcent' => $cost_pcent,
+            'bank_transfer' => $bank_transfer,
+        ];
+
+        $res['data'] = $arr;
+        $res['cont_id'] = $cont_id;
+        return $res;
     }
 }

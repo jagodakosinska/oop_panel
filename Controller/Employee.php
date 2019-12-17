@@ -43,7 +43,7 @@ class Employee extends Employee_M
         $this->displayer($data, $template_name);
     }
 
-    public function show_form($p)
+    public function add_employee($p)
     {
         $template_name = 'views/employee/form.php';
         $data['page_title'] = "Dodaj Pracownika";

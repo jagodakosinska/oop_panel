@@ -54,7 +54,7 @@ if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {
 }
 
 if(isset($p['add_emp'])) {
-    $emp->show_form($p);
+    $emp->add_employee($p);
 }
 
 if(isset($p['insert_emp']) && $p['insert_emp'] === 'Dodaj'){
@@ -81,7 +81,7 @@ if(isset($p['show_cont_item']) && is_numeric($p['show_cont_item'])){
 }
 
 if(isset($p['add_cont'])){
-    $contract->show_form($p);
+    $contract->add_contract($p);
 }
 
 
@@ -107,21 +107,16 @@ if(isset($p['show_bill_item']) && is_numeric($p['show_bill_item'])) {
     $bill->show_bill($p['show_bill_item']);
 }
 
+if(isset($p['add_bill'])){
+    $bill->add_bill($p);
+}
+
+if(isset($p['insert_bill']) && $p['insert_bill'] === 'Dodaj'){
+    $bill->create_bill($p);
+}
+
 if(isset($p['delete_bill']) && is_numeric($p['delete_bill'])){
     $bill->delete_bill($p['delete_bill']);
 }
 
 include("views/footer.php");
-
-
-
-
-
-
-
-
-
-
-
-
-

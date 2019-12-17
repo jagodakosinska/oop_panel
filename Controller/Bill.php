@@ -22,7 +22,7 @@ class Bill extends Bill_M
     public function validation_data($arr)
     {
 
-        $res = $this->valid->valid_contract($arr);
+        $res = $this->valid->valid_bill($arr);
         return $res;
     }
 
@@ -50,42 +50,39 @@ class Bill extends Bill_M
         $this->displayer($data, $template_name);
     }
 
-    // function add_new($uid, $bank_transfer, $cost_pcent)
-    // {
-    //     $data = $this->data;
-    //     $data['form_data'] = $this->input->post('bill');
-    //     $data['uid'] = $uid;
-    //     $data['cost_pcent'] = $cost_pcent;
-    //     $data['bank_transfer'] = $bank_transfer;
-    //     $this->load_views($data, 'form');
-    // }
+    function add_bill($p)
+    {
+        $template_name = 'views/bill/form.php';
+        $data['page_title'] = "Dodaj Rachunek";
+        $data['bill'] = '';
+        $data['submit'] = 'insert_bill';
+        $data['value'] = 'Dodaj';
+        $data['bill'] = isset($p['bill']) ? $p['bill'] : $data['bill'];
+        $data['cont_id'] = isset($p['add_bill']) ? $p['add_bill'] : $p['cont_id'];
+        $data['cost_pcent'] = $p['cost_pcent'];
+        $data['bank_transfer'] =$p['bank_transfer'];
+        $data['errors'] = $p['errors'];
+        $this->displayer($data, $template_name);
+     
+    }
 
-    // function insert()
-    // {
-    //     $data = $this->data;
-    //     $data['form_data'] = $this->input->post('bill');
-    //     $data['uid'] =  $this->input->post('bill[uid]');
-    //     $data['cost_pcent'] =  $this->input->post('bill[cost_pcent]');
-    //     $data['bank_transfer'] =  $this->input->post('bill[bank_transfer]');
 
-    //     if ($this->input->post('add_bill')) {
-    //         $arr = $this->Bill_M->valid_data();
-    //         if (!is_null($arr)) {
-    //             $id = $this->Bill_M->insert($arr);
-    //             $this->Contract_M->update_contract_bill($id, $data['uid']);
-    //             $this->Bill_M->update_bill_number($id);
-    //             $this->create_pdf($id);
-    //             $this->session->set_flashdata('info', 'Utworzono nowy rachunek');
-    //             redirect('home');
-    //         }
-    //         $this->session->set_flashdata('error', "Nie udało się dodać rachunku!");
-    //     }
-    //     $this->load_views($data, 'form');
-    // }
-    // function create_pdf($id)
-    // {
-    //     $this->Bill_M->update_bill_pdf($id);
-    // }
+    
+    public function create_bill($arr){
+
+    
+        $res = $this->validation_data($arr['bill']);
+     
+        if ($res['status'] === true) {
+            $id = $this->insert_bill($res['data']);
+            $this->update_contract_bill($id, $res['cont_id']);
+            $this->update_bill_number($id);
+            $this->show_bill($id);
+        } else {
+            $arr['errors'] = $res['data'];
+            $this->add_bill($arr);
+        }
+    }
 
 
     function delete_bill($id){

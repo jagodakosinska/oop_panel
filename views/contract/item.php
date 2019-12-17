@@ -16,6 +16,12 @@
 
 </ul>
 <div class="contract__button">
+
+<?php if (is_null($data['cont']['bill'])) { ?>
+                                <a class="btn btn-default" href="?add_bill=<?= $data['cont']['id'] ?>&bank_transfer=<?= $data['emp']['bank_transfer'] ?>&cost_pcent=<?= $data['emp']['cost_pcent'] ?>">Dodaj rachunek</a>
+                            <?php }  ?>
+                                <a href="?delete_cont=<?= $data['cont']['id'] ?>" class="btn btn-danger">Usuń umowę</a>
+                            
 <a class="btn btn-primary"  href="?edit_cont=<?= $data['cont']['id'] ?>&uid=<?= $data['emp']['id'] ?>">Edycja</a>
 </div>
 </div>

@@ -46,7 +46,7 @@ class Contract_M extends Database
         $val = array_values($arr);
         $sql = "INSERT INTO `contract` (" . implode(', ', $key) . ") "
             . "VALUES ('" . implode("', '", $val) . "')";
-        $res = $this->conn->query($sql);
+        $this->conn->query($sql);
         $id = $this->conn->insert_id;
         return $id;
     }

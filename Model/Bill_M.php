@@ -58,52 +58,35 @@ class Bill_M extends Database
         $this->conn->query($sql2);
         return $res[0]['id'];
     }
-    // function valid_data()
-    // {
-    //     $this->form_validation->set_rules('bill[bill_date]', 'Data wystawienia', 'required|trim');
-    //     $this->form_validation->set_rules('bill[netto]', 'Kwota netto', 'required|trim');
-    //     $this->form_validation->set_rules('bill[uid]', '', 'required|numeric');
-    //     $this->form_validation->set_rules('bill[cost_pcent]', '', 'required|numeric');
-    //     $this->form_validation->set_rules('bill[bank_transfer]', '', 'required|numeric');
-    //     if ($this->form_validation->run() !== false) {
-    //         $data['form_data'] = $this->input->post('bill');
-    //         $form_data = $data['form_data'];
-    //         $arr = [
-    //             'bill_date' => $form_data['bill_date'],
-    //             'netto' => $form_data['netto'],
-    //             'cost_pcent' => $form_data['cost_pcent'],
-    //             'bank_transfer' => $form_data['bank_transfer'],
-    //         ];
-    //         return $arr;
-    //     }
-    //     return null;
-    // }
 
-    // function insert($arr){
-    //     $this->db->insert('bill', $arr);
-    //     $id = $this->db->insert_id();
-    //     return $id;
-    // }
+   public function insert_bill($arr){
+    $key = array_keys($arr);
+    $val = array_values($arr);
+    $sql = "INSERT INTO `bill` (" . implode(', ', $key) . ") "
+        . "VALUES ('" . implode("', '", $val) . "')";
+    $this->conn->query($sql);
+    $id = $this->conn->insert_id;
+    return $id;
 
-    // function update_bill_number($id){
-    //     $res = $this->Contract_M->show_by_bill_id($id);
-    //     if(!is_null($res)){
-    //         $num = $res->number . '/' . date('m') . '/' .  date('Y');
-    //         $this->db->set('full_number', $num)->where('id', $id)->update('bill');
-    //     } else {
-    //         return null;
-    //     }
-    // }
+    }
 
-    // function update_bill_pdf($id)
-    // {
-    //     $url_to_pdf = site_url("pdf/create_bill_pdf/{$id}");
-    //     require dirname(dirname(__FILE__)) . '/third_party/pdf/vendor/autoload.php';
-    //     $snappy = new Pdf('/usr/bin/xvfb-run /usr/bin/wkhtmltopdf --lowquality');
-    //     $pdf_content = $snappy->getOutput($url_to_pdf);
-    //     $this->db->set('pdf', $pdf_content)->where('id', $id)->update('bill');
-    // }
 
-  
+    public function update_contract_bill($bill_id, $cont_id)
+    {
+        $sql = "UPDATE contract SET bill=$bill_id WHERE id=$cont_id";
+        $this->conn->query($sql);
+    }
+        
+    public function update_bill_number($id){
+        $res = $this->show_by_bill_id($id);
+        if(!is_null($res)){
+            $num = $res['number'] . '/' . date('m') . '/' .  date('Y');
+            $sql = "UPDATE bill SET full_number='$num' WHERE id=$id";
+            $this->conn->query($sql);
+        } else {
+            return null;
+        }
+    }
+
 
 }
