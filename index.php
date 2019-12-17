@@ -16,6 +16,7 @@ echo '</pre>';
 // Create New Instance
 $emp = new Employee();
 $contract = new Contract();
+$bill = new Bill();
 $api = new Api();
 $displayer = new Displayer();
 
@@ -32,13 +33,7 @@ if(empty($p)) {
     $displayer->load_view(null, "views/home.php");
 }
 
-//Employee
-
 $p['errors'] = [];
-
-if(isset($p['show_emp'])) {
-    $emp->show_all();
-}
 
 if(isset($p['change_year'])){
     $api->change_year($p['change_year']);
@@ -48,6 +43,12 @@ if(isset($p['change_month'])){
     $api->change_month($p['change_month']);
 }
 
+//Employee
+
+
+if(isset($p['show_emp'])) {
+    $emp->show_employees();
+}
 if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {
     $emp->show_employee($p['show_emp']);
 }
@@ -96,6 +97,19 @@ if(isset($p['update_cont']) && $p['update_cont'] === 'Edytuj'){
     $contract->set_contract($p);
 }
 
+//Bill
+
+if(isset($p['show_bills'])){
+    $bill->show_bills();
+}
+
+if(isset($p['show_bill_item']) && is_numeric($p['show_bill_item'])) {
+    $bill->show_bill($p['show_bill_item']);
+}
+
+if(isset($p['delete_bill']) && is_numeric($p['delete_bill'])){
+    $bill->delete_bill($p['delete_bill']);
+}
 
 include("views/footer.php");
 

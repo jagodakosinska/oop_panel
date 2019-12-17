@@ -78,4 +78,5 @@ class Contract_M extends Database
         $res = $this->conn->query($sql);
         return $res;
     }
+    
 }

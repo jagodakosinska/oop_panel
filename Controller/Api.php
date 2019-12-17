@@ -36,7 +36,7 @@ class Api
 
     public function session_data()
     {
-
+       
         if (!isset($_SESSION['year'])) {
             $this->set_userdata('year', date('Y'));
         }

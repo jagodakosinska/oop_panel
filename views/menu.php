@@ -11,7 +11,7 @@
                 <li><a href="?add_emp">Dodaj Pracownika</a></li>
                 <li><a href="?show_emp">Pracownicy
                 <li><a href="?show_contracts">Umowy</a></li>
-                <li><a href="">Rachunki</a></li>
+                <li><a href="?show_bills">Rachunki</a></li>
 
                 </a></li>
             </ul>

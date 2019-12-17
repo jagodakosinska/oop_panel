@@ -10,8 +10,8 @@
 foreach($data['all_contracts'] as $cont){
     ?>
 
-<ul class="employee__list">
-    <li class="employee__item"><a href="?show_cont_item=<?= $cont['id'] ?>" ><?= $cont['full_number'] ?></a></li>
+<ul class="contract__list">
+    <li class="contract__item"><a href="?show_cont_item=<?= $cont['id'] ?>" ><?= $cont['full_number'] ?></a></li>
 </ul>
 
 
