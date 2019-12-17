@@ -1,4 +1,5 @@
-<div class='page-header'>
+<div class="container">
+    <div class='page-header'>
 <h1><?= $data['page_title'] ?></h1>
     </div>
 <?php  ?>
@@ -222,3 +223,4 @@
         <!--/.content-->
     </div>
     <!--/.span9-->
+</div>

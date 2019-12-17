@@ -1,4 +1,4 @@
-
+<div class="container">
 <div class='page-header'>
         <h1><?= $data['page_title'] ?></h1>
     </div>
@@ -15,3 +15,4 @@ foreach($data['all_employees'] as $emp){
 
 
 <?php } ?>
+</div>

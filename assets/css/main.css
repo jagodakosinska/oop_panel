@@ -39,6 +39,7 @@ body {
     text-align: right;
 }
 
+
 .contract__button {
     text-align: center;
 }
@@ -127,4 +128,12 @@ body {
 input {
     height: auto important!;
     /* line-height: 30px; */
+}
+
+
+.title{
+    font-weight: 24px;
+    font-size: large;
+    text-align: left;
+    line-height: 24px;
 }

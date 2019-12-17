@@ -1,3 +1,4 @@
+<div class="container">
 <div class="span9">
     <div class="content">
     <div class='page-header'>
@@ -42,4 +43,5 @@
         </form>
     </div>
 
+</div>
 </div>

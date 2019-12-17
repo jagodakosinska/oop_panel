@@ -69,9 +69,10 @@ class Employee extends Employee_M
 
     public function edit_employee($p)
     {
+        // dump($p);
         $template_name = 'views/employee/form.php';
         $data['page_title'] = "Edycja Pracownika";
-        $id = $p['edit_emp'];
+        $id = isset($p['edit_emp']) ? $p['edit_emp'] : $p['id'] ;
         $data['submit']  = 'update_emp';
         $data['value'] = 'Edytuj';
         $data['errors'] = $p['errors'];

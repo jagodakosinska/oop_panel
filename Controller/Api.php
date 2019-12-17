@@ -88,6 +88,12 @@ class Api
     }
 
 
+    function change_month($month)
+    {
+        if (is_numeric($month)) {
+            $this->set_userdata('month',  $month);
+        }
+    }
    
 
     // if (!(isset($this->session->user) && $this->session->user['logged_in'])) {

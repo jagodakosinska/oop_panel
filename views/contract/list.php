@@ -1,5 +1,6 @@
 
-<div class='page-header'>
+<div class="container">
+    <div class='page-header'>
         <h1><?= $data['page_title'] ?></h1>
     </div>
 
@@ -15,3 +16,4 @@ foreach($data['all_contracts'] as $cont){
 
 
 <?php } ?>
+</div>

@@ -1,4 +1,5 @@
-<div class='page-header'>
+<div class="container">
+    <div class='page-header'>
         <h1 class="contract__title"><?= $data['emp']['fname'] ?> <?= $data['emp']['lname'] ?></h1>
     </div>
 
@@ -16,4 +17,5 @@
 </ul>
 <div class="contract__button">
 <a class="btn btn-primary"  href="?edit_cont=<?= $data['cont']['id'] ?>&uid=<?= $data['emp']['id'] ?>">Edycja</a>
+</div>
 </div>

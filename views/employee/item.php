@@ -1,3 +1,4 @@
+<div class="container">
 <div class='page-header'>
         <h1><?= $data['emp']['fname'] ?> <?= $data['emp']['lname'] ?></h1>
     </div>
@@ -52,3 +53,4 @@
         <a class="btn btn-primary" href="?edit_emp=<?= $data['emp']['id'] ?>">Edycja</a>
     </div>
 </div>
+ 

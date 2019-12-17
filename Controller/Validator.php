@@ -24,6 +24,12 @@ class Validator
         $home_nr = trim($emp['home_nr']);
         $zip = trim($emp['zip']);
         if (empty($zip)) $err[] = 'Kod pocztowy nie może być pusty';
+        $cost_pcent = trim($emp['cost_pcent']);
+        if (empty($cost_pcent)) $err[] = 'Proszę wybrać koszty';
+        $bank_transfer = trim($emp['bank_transfer']);
+        if (!isset($bank_transfer)) $err[] = 'Proszę wybrać formę zapłaty';
+        $task_contract = trim($emp['task_contract']);
+        if (empty($task_contract)) $err[] = 'Proszę wybrać rodzaj umowy';
         $res = [];
         $res['status'] = true;
         $res['data'] = [];
@@ -42,6 +48,10 @@ class Validator
             'street_nr' => $street_nr,
             'home_nr' => $home_nr,
             'zip' => $zip,
+            'cost_pcent' => $cost_pcent,
+            'bank_transfer' => $bank_transfer,
+            'task_contract' => $task_contract,
+            
         ];
 
         foreach ($arr as $key => $value) {

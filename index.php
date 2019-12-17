@@ -18,6 +18,7 @@ $contract = new Contract();
 $api = new Api();
 $displayer = new Displayer();
 
+
 $p = array_merge($_POST, $_GET);
 $api->session_data();
 
@@ -26,17 +27,24 @@ $api->session_data();
 include "views/header.php";
 $displayer->load_view($api->data, "views/menu.php");
 
-
-//Employee
 if(empty($p)) {
-    $emp->show_all();
+    $displayer->load_view(null, "views/home.php");
 }
 
+//Employee
 
 $p['errors'] = [];
 
+if(isset($p['show_emp'])) {
+    $emp->show_all();
+}
+
 if(isset($p['change_year'])){
     $api->change_year($p['change_year']);
+}
+
+if(isset($p['change_month'])){
+    $api->change_month($p['change_month']);
 }
 
 if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {
