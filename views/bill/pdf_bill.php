@@ -2,15 +2,15 @@
    <div class="bill__date">Wrocław dn. <?= date('Y-m-d') ?></div>
    <h1 class="bill__title"> Rachunek</h1>
    <div class="bill__content">
-      <p class="bill__subtitle">Rachunek nr <?= $bill->full_number ?>, z dnia <?= $bill->bill_date ?>
+      <p class="bill__subtitle">Rachunek nr <?= $data['bill']['full_number'] ?>, z dnia <?= $data['bill']['bill_date'] ?>
       </p>
       <Br>
       <p class="bill__content--left">
-         Zleceniobiorca: <?= $employee->fname . " " . $employee->lname ?>
+         Zleceniobiorca: <?= $employee->fname . " " . $data['employee']['lname'] ?>
          <br>
          Dla Emin Jacek Kosiński
          <br>
-         za wykonanie pracy, której przedmiotem jest: <?= $contract->title ?>
+         za wykonanie pracy, której przedmiotem jest: <?= $data['contract']['title'] ?>
          <br>
       </p>
       <h3 class="bill__subtitle"> ROZLICZENIE </h3>
@@ -28,7 +28,7 @@
          <br>
          6. Zaliczka na podatek dochodowy: ...............................
          <br>
-         7. Kwota do wypłaty: <?= $bill->netto ?>
+         7. Kwota do wypłaty: <?= $data['bill']['netto'] ?>
          <br>
          (słownie: ........................................................................................................................................)
          <br>

@@ -39,7 +39,7 @@ class Pdf
         exit();
     }
     
-    function create_bill_pdf($id)
+    function show_bill_pdf($id)
     {
         $data['bill'] = $this->billM->get_by_id($id);
         $data['contract'] = $this->billM->show_by_bill_id($id);
@@ -47,14 +47,15 @@ class Pdf
         $data['employee'] = $this->empM->get_by_id($uid);
         $template_name = 'views/bill/pdf_bill.php';;
         $this->displayer->load_view($data, $template_name);
-      
+      exit;
     }
 
     function display_bill_pdf($id)
     {
-        $pdf = $this->Bill_M->get_by_id($id);
+        $pdf = $this->billM->get_by_id($id);
+        $filename = str_replace('/', '_', $pdf['full_number']);
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="file.pdf"');
+        header("Content-Disposition: attachment; filename='{$filename}.pdf'");
         echo $pdf['pdf'];
         exit();
     }

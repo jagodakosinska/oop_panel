@@ -7,7 +7,7 @@
         <li class="bill__item"><span class="contract__important">Koszty: </span><?= $data['bill']['cost_pcent']  ?> %</li>
         <li class="bill__item"><span class="contract__important">PDF:</span>
         <?php if(!is_null($data['bill'])){ ?> 
-            <a href="?" target="_blank" ><i class="menu-icon icon-file" ></i>Otwórz</a> 
+            <a href="?display_bill_pdf=<?= $data['bill']['id'] ?>" target="_blank" ><i class="menu-icon icon-file" ></i>Otwórz</a> 
         <?php } else { ?> 
             Brak
         <?php }  ?>
@@ -16,7 +16,7 @@
 <hr>
 <div class="bill__button"> 
 <?php if(is_null($data['bill']['pdf'])){ ?>
-        <button class="btn btn-default"><a href="?">Generuj PDF</a>
+        <button class="btn btn-default"><a href="?bill_pdf=<?= $data['bill']['id'] ?>">Generuj PDF</a>
         </button>
 <?php } else { ?>
     <a href="?delete_bill=<?=$data['bill']['id']?>" class="btn btn-danger">Usuń rachunek</a>

@@ -30,20 +30,28 @@ if(isset($p['display_contract_pdf']) && is_numeric($p['display_contract_pdf'])) 
     $pdf->display_contract_pdf($p['display_contract_pdf']);
 }
 
+if(isset($p['display_bill_pdf']) && is_numeric($p['display_bill_pdf'])) {
+    $pdf->display_bill_pdf($p['display_bill_pdf']);
+}
 
 //Include Views
 include "views/header.php";
 
-
-if(isset($p['show_contract']) && is_numeric($p['show_contract'])) {
-    $pdf->show_contract_pdf($p['show_contract']);
-}
-
-
 //PDF
+if(isset($p['show_contract_pdf']) && is_numeric($p['show_contract_pdf'])) {
+    $pdf->show_contract_pdf($p['show_contract_pdf']);
+}
 
 if(isset($p['contract_pdf']) && is_numeric($p['contract_pdf'])){
     $contract->update_contract_pdf($p['contract_pdf']);
+}
+
+if(isset($p['show_bill_pdf']) && is_numeric($p['show_bill_pdf'])) {
+    $pdf->show_bill_pdf($p['show_bill_pdf']);
+}
+
+if(isset($p['bill_pdf']) && is_numeric($p['bill_pdf'])){
+    $bill->update_bill_pdf($p['bill_pdf']);
 }
 
 
@@ -68,7 +76,7 @@ if(isset($p['change_month'])){
 //Employee
 
 
-if(isset($p['show_emp'])) {
+if(isset($p['show_all_emp'])) {
     $emp->show_employees();
 }
 if(isset($p['show_emp']) && is_numeric($p['show_emp'])) {

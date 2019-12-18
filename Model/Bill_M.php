@@ -1,5 +1,7 @@
 <?php
 
+use Knp\Snappy\Pdf;
+
 
 class Bill_M extends Database
 {
@@ -87,6 +89,22 @@ class Bill_M extends Database
             return null;
         }
     }
+
+
+    function update_bill_pdf($id)
+    {
+     
+        $url_to_pdf = "http://localhost/oop_panel/?show_bill_pdf=$id";
+        require dirname(dirname(__FILE__)) . '/pdf_library/vendor/autoload.php';
+        $snappy = new Pdf('/usr/bin/xvfb-run /usr/bin/wkhtmltopdf --lowquality');
+        $pdf_content = $snappy->getOutput($url_to_pdf);
+        $pdf_content = $this->conn->escape_string($pdf_content);
+        $sql = "UPDATE `bill` SET `pdf`='$pdf_content' WHERE id=$id";
+        $this->conn->query($sql);
+       
+   
+    }
+    
 
 
 }
