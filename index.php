@@ -19,18 +19,40 @@ $contract = new Contract();
 $bill = new Bill();
 $api = new Api();
 $displayer = new Displayer();
+$pdf = new Pdf();
 
 
 $p = array_merge($_POST, $_GET);
 $api->session_data();
 
 
+if(isset($p['display_contract_pdf']) && is_numeric($p['display_contract_pdf'])) {
+    $pdf->display_contract_pdf($p['display_contract_pdf']);
+}
+
+
 //Include Views
 include "views/header.php";
+
+
+if(isset($p['show_contract']) && is_numeric($p['show_contract'])) {
+    $pdf->show_contract_pdf($p['show_contract']);
+}
+
+
+//PDF
+
+if(isset($p['contract_pdf']) && is_numeric($p['contract_pdf'])){
+    $contract->update_contract_pdf($p['contract_pdf']);
+}
+
+
+//menu
 $displayer->load_view($api->data, "views/menu.php");
 
+
 if(empty($p)) {
-    $displayer->load_view(null, "views/home.php");
+$displayer->load_view(null, "views/home.php");
 }
 
 $p['errors'] = [];
@@ -118,5 +140,9 @@ if(isset($p['insert_bill']) && $p['insert_bill'] === 'Dodaj'){
 if(isset($p['delete_bill']) && is_numeric($p['delete_bill'])){
     $bill->delete_bill($p['delete_bill']);
 }
+
+
+
+
 
 include("views/footer.php");

@@ -13,26 +13,13 @@ class Employee extends Employee_M
         $this->valid = new Validator();
     }
 
-    public function validation_data($arr)
-    {
-
-        $res = $this->valid->valid_employee($arr);
-        return $res;
-    }
-
-
-    public function displayer($data, $template_name)
-    {
-        $this->displayer->load_view($data, $template_name);
-    }
-
     public function show_employees()
     {
         $template_name = 'views/employee/list.php';
         $data['page_title'] = "Lista pracowników";
         $data['all_employees'] = $this->get_all();
 
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
 
@@ -40,7 +27,7 @@ class Employee extends Employee_M
     {
         $template_name = 'views/employee/item.php';
         $data['emp'] = $this->get_by_id($id);
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     public function add_employee($p)
@@ -52,18 +39,18 @@ class Employee extends Employee_M
         $data['value'] = 'Dodaj';
         $data['errors'] = $p['errors'];
         $data['emp'] = isset($p['emp']) && !empty($p['emp']) ? $p['emp'] : $data['emp'];
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     public function create_employee($arr)
     {
-        $res = $this->validation_data($arr['emp']);
+        $res = $this->valid->valid_employee($arr['emp']);
         if ($res['status'] === true) {
             $id = $this->insert_employee($res);
             $this->show_employee($id);
         } else {
             $arr['errors'] = $res['data'];
-            $this->show_form($arr);
+            $this->add_employee($arr);
         }
     }
 
@@ -77,13 +64,13 @@ class Employee extends Employee_M
         $data['value'] = 'Edytuj';
         $data['errors'] = $p['errors'];
         $data['emp'] = isset($p['emp']) && !empty($p['emp']) ? $p['emp'] : $this->get_by_id($id);
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     public function set_employee($arr)
     {
         $id = $arr['id'];
-        $res = $this->validation_data($arr['emp']);
+        $res = $this->valid->valid_employee($arr['emp']);
         if ($res['status'] === true) {
             $this->update_employee($id, $res['data']);
             $this->show_employee($id);

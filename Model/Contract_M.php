@@ -1,9 +1,9 @@
 <?php
 
+use Knp\Snappy\Pdf;
+
 class Contract_M extends Database
 {
-
-
 
     public function __construct()
     {
@@ -78,5 +78,19 @@ class Contract_M extends Database
         $res = $this->conn->query($sql);
         return $res;
     }
+
+    function update_contract_pdf($id)
+    {
+      
+        $url_to_pdf = "http://localhost/oop_panel/?show_contract=$id";
+        require dirname(dirname(__FILE__)) . '/pdf_library/vendor/autoload.php';
+        $snappy = new Pdf('/usr/bin/xvfb-run /usr/bin/wkhtmltopdf --lowquality');
+        $pdf_content = $snappy->getOutput($url_to_pdf);
+        $pdf_content = $this->conn->escape_string($pdf_content);
+          $sql = "UPDATE `contract` SET `pdf`='$pdf_content' WHERE id=$id";
+        $res = $this->conn->query($sql);
+   
+    }
+    
     
 }

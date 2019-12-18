@@ -19,26 +19,13 @@ class Bill extends Bill_M
         $this->valid = new Validator();
     }
 
-    public function validation_data($arr)
-    {
-
-        $res = $this->valid->valid_bill($arr);
-        return $res;
-    }
-
-
-    public function displayer($data, $template_name)
-    {
-        $this->displayer->load_view($data, $template_name);
-    }
-
 
     public function show_bills()
     {
         $template_name = 'views/bill/list.php';
         $data['page_title'] = "Lista rachunków";
         $data['all_bills'] = $this->get_all();
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     function show_bill($id){
@@ -47,7 +34,7 @@ class Bill extends Bill_M
         $data['contract'] = $this->show_by_bill_id($id);
         $uid = $data['contract']['uid'];
         $data['employee'] = $this->empM->get_by_id($uid);
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     function add_bill($p)
@@ -62,8 +49,7 @@ class Bill extends Bill_M
         $data['cost_pcent'] = $p['cost_pcent'];
         $data['bank_transfer'] =$p['bank_transfer'];
         $data['errors'] = $p['errors'];
-        $this->displayer($data, $template_name);
-     
+        $this->displayer->load_view($data, $template_name);
     }
 
 
@@ -71,7 +57,7 @@ class Bill extends Bill_M
     public function create_bill($arr){
 
     
-        $res = $this->validation_data($arr['bill']);
+        $res = $this->valid->valid_bill($arr['bill']);
      
         if ($res['status'] === true) {
             $id = $this->insert_bill($res['data']);

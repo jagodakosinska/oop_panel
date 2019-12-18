@@ -45,7 +45,7 @@ body {
 }
 
 .contract__container {
-    margin: 0 auto;
+    margin: 16px auto;
     text-align: left;
     border: 1px solid rgb(184, 187, 190);
     padding: 16px;

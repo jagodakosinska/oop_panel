@@ -1,5 +1,6 @@
 <?php
 
+
 class Contract extends Contract_M
 {
     var $empM;
@@ -15,26 +16,12 @@ class Contract extends Contract_M
         $this->valid = new Validator();
     }
 
-    public function validation_data($arr)
-    {
-
-        $res = $this->valid->valid_contract($arr);
-        return $res;
-    }
-
-
-    public function displayer($data, $template_name)
-    {
-        $this->displayer->load_view($data, $template_name);
-    }
-
-
     public function show_all()
     {
         $template_name = 'views/contract/list.php';
         $data['page_title'] = "Lista umów";
         $data['all_contracts'] = $this->get_all();
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     public function show_contract($id)
@@ -43,7 +30,7 @@ class Contract extends Contract_M
         $data['cont'] = $this->get_by_id($id);
         $uid =  $data['cont']['uid'];
         $data['emp'] = $this->empM->get_by_id($uid);
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     public function add_contract($p)
@@ -57,20 +44,22 @@ class Contract extends Contract_M
         $data['uid'] = $p['add_cont'];
         $data['task'] = $p['task_contract'];
         $data['cont'] = isset($p['cont']) && !empty($p['cont']) ? $p['cont'] : $data['cont'];
-        $this->displayer($data, $template_name);
+        $this->displayer->load_view($data, $template_name);
     }
 
     public function create_contract($arr)
     {
-        $res = $this->validation_data($arr['cont']);
+        $res = $this->valid->valid_contract($arr['cont']);
         if ($res['status'] === true) {
             $id = $this->insert_contract($res['data'], $res['task']);
+            $this->update_contract_pdf($res['id']);
             $this->show_contract($id);
         } else {
             $arr['errors'] = $res['data'];
             $this->add_contract($arr);
         }
     }
+
 
     public function edit_contract($p){
             $template_name = 'views/contract/form.php';
@@ -82,12 +71,12 @@ class Contract extends Contract_M
             $data['uid'] = isset($p['cont']['uid']) ? $p['cont']['uid'] : $p['uid'];
             $data['task'] = 'brak';
             $data['cont'] = isset($p['cont']) && !empty($p['cont']) ? $p['cont'] : $this->get_by_id($data['id']);
-            $this->displayer($data, $template_name);
+            $this->displayer->load_view($data, $template_name);
     }
 
     public function set_contract($arr){
         $id = $arr['id'];
-        $res = $this->validation_data($arr['cont']);
+        $res = $this->valid->valid_contract($arr['cont']);
         if ($res['status'] === true) {
             $this->update_contract($id, $res['data']);
             $this->show_contract($id);
@@ -96,5 +85,9 @@ class Contract extends Contract_M
             $this->edit_contract($arr);
         }
     }
+
+
+
+
 
 }

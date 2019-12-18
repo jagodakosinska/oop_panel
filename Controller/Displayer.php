@@ -1,11 +1,7 @@
 <?php
 
 class Displayer{
-    public function __construct()
-    {
-    }
     
-
     public function load_view($data, $template_name) {
         
         include($template_name);
