@@ -89,7 +89,7 @@ class Contract_M extends Database
         $pdf_content = $this->conn->escape_string($pdf_content);
         $sql = "UPDATE `contract` SET `pdf`='$pdf_content' WHERE id=$id";
         $this->conn->query($sql);
-   
+        return true;
     }
     
     

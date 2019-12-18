@@ -23,13 +23,23 @@ class Employee_M extends Database
 
     public function get_by_id($id)
     {
-        $sql = "SELECT * FROM employee WHERE id=$id";
+        $sql = "SELECT * FROM `employee` WHERE `id`=$id";
         $result = $this->conn->query($sql);
         $res = array();
         if ($result->num_rows > 0) {
             while ($res[] = $result->fetch_assoc()) { }
         }
         return $res[0];
+    }
+
+    public function get_cont_by_uid($id){
+        $sql = "SELECT * FROM `contract` WHERE `uid`=$id";
+        $result = $this->conn->query($sql);
+        $res = array();
+        if ($result->num_rows > 0) {
+            while ($res[] = $result->fetch_assoc()) { }
+        }
+        return $res;
     }
 
     public function insert_employee($arr)

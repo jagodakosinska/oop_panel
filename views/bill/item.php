@@ -6,7 +6,7 @@
         <li class="bill__item"><span class="contract__important">Kwota netto: </span><?= $data['bill']['netto']  ?></li>
         <li class="bill__item"><span class="contract__important">Koszty: </span><?= $data['bill']['cost_pcent']  ?> %</li>
         <li class="bill__item"><span class="contract__important">PDF:</span>
-        <?php if(!is_null($data['bill'])){ ?> 
+        <?php if(!is_null($data['bill']['pdf'])){ ?> 
             <a href="?display_bill_pdf=<?= $data['bill']['id'] ?>" target="_blank" ><i class="menu-icon icon-file" ></i>Otwórz</a> 
         <?php } else { ?> 
             Brak

@@ -40,11 +40,11 @@
 
    if(isset($data['cont'])){ 
        foreach($data['cont'] as $cont){ ?>
-        <li class="contract__item"> <a href="?show_item=<?= $cont['id'] ?>" ><?= $cont->full_number ?></a></li>
+        <li class="contract__item"> <a href="?show_cont_item=<?= $cont['id'] ?>" ><?= $cont['full_number'] ?></a></li>
       <?php } ?>
    </ul>
    <?php } else { ?>
-    <p>brak umów dla tego pracownika w wybranym okresie <?php // $month . "/" . $year ?></p>
+    <p>brak umów dla tego pracownika</p>
  <?php  } ?>
  </div>
     <hr>

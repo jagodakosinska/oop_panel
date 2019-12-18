@@ -52,7 +52,7 @@ class Contract extends Contract_M
         $res = $this->valid->valid_contract($arr['cont']);
         if ($res['status'] === true) {
             $id = $this->insert_contract($res['data'], $res['task']);
-            $this->update_contract_pdf($res['id']);
+            $this->update_contract_pdf($id);
             $this->show_contract($id);
         } else {
             $arr['errors'] = $res['data'];

@@ -25,8 +25,11 @@ class Employee extends Employee_M
 
     public function show_employee($id)
     {
+        
         $template_name = 'views/employee/item.php';
+        $data['cont'] = $this->get_cont_by_uid($id);
         $data['emp'] = $this->get_by_id($id);
+        // dump($data['cont']['uid']);
         $this->displayer->load_view($data, $template_name);
     }
 

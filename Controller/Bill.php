@@ -63,7 +63,7 @@ class Bill extends Bill_M
             $id = $this->insert_bill($res['data']);
             $this->update_contract_bill($id, $res['cont_id']);
             $this->update_bill_number($id);
-            $this->update_bill_pdf($res['id']);
+            $this->update_bill_pdf($id);
             $this->show_bill($id);
         } else {
             $arr['errors'] = $res['data'];
